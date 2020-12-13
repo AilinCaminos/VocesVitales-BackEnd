@@ -1,6 +1,5 @@
 package ar.com.vocesvitales.api.vocesvitales.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ar.com.vocesvitales.api.vocesvitales.entities.Pregunta;
 import ar.com.vocesvitales.api.vocesvitales.entities.Respuesta;
 import ar.com.vocesvitales.api.vocesvitales.models.response.PreguntaResponse;
-import ar.com.vocesvitales.api.vocesvitales.repositories.PreguntaRepository;
 import ar.com.vocesvitales.api.vocesvitales.services.PreguntaService;
 
 @RestController
@@ -35,15 +33,38 @@ public class PreguntaController {
         
     }
 
+    @GetMapping("/api/v1/pregunta")
+    public ResponseEntity<List<Pregunta>> getPreguntas(){
+
+        return ResponseEntity.ok(preguntaService.listarPreguntas());
+
+    }
+
+    @GetMapping("/api/v1/pregunta/{id}")
+    public ResponseEntity<Pregunta> getPreguntas(@PathVariable Integer id){
+
+        Pregunta pregunta = preguntaService.buscarPreguntaPorId(id);
+
+        if (pregunta == null) {
+
+            return ResponseEntity.notFound().build();
+
+        }
+        
+        return ResponseEntity.ok(pregunta);
+    }
+ /*
     @GetMapping ("api/v1/pregunta/{id}/respuestas/") 
-    public ResponseEntity<List<PreguntaResponse>>getRespuestas( @PathVariable Integer id ){
+    public ResponseEntity<List<Respuesta>> getRespuestas(@PathVariable Integer id ){
 
          Pregunta pregunta = new Pregunta();
 
-         pregunta = preguntaService.findRespuestaPorId(id);
+         pregunta = preguntaService.buscarPreguntaPorId(id);
 
-         return (ResponseEntity<List<PreguntaResponse>>) pregunta.getRespuestas();
+         return ResponseEntity.ok(pregunta.getRespuestas());
+
     }
+    */
         
 
         
@@ -59,5 +80,5 @@ public class PreguntaController {
       
         
 
-    } 
+
 }

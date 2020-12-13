@@ -13,19 +13,21 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "pregunta")
 public class Pregunta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "id_pregunta")
+    @Column(name= "pregunta_id")
     private Integer preguntaId;
     private String titulo;
     private String descripcion;
+    @JsonIgnore
     @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Respuesta> respuestas = new ArrayList<>();
-    private String tag;
 
     public Integer getPreguntaId() {
         return preguntaId;
@@ -57,14 +59,6 @@ public class Pregunta {
 
     public void setRespuestas(List<Respuesta> respuestas) {
         this.respuestas = respuestas;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
     }
 
 }

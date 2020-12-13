@@ -1,6 +1,10 @@
 package ar.com.vocesvitales.api.vocesvitales.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -11,8 +15,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name= "respuesta")
 public class Respuesta {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name= "respuesta_id")
     private Integer respuestaId;
-    private String descripcionRespuesta;
+    private String descripcion;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "pregunta_id", referencedColumnName = "pregunta_id")
@@ -26,12 +33,12 @@ public class Respuesta {
         this.respuestaId = respuestaId;
     }
 
-    public String getDescripcionRespuesta() {
-        return descripcionRespuesta;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescripcionRespuesta(String descripcionRespuesta) {
-        this.descripcionRespuesta = descripcionRespuesta;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Pregunta getPregunta() {

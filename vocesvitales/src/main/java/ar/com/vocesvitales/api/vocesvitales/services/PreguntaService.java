@@ -1,5 +1,7 @@
 package ar.com.vocesvitales.api.vocesvitales.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +19,21 @@ public class PreguntaService {
 
     }
     
-    @Autowired
-    PreguntaRepository preguntaRepository2;
-    public Pregunta findRespuestaPorId(Integer id) {
+
+    public Pregunta buscarPreguntaPorId(Integer id) {
         
-    preguntaRepository2.findById(id);
+    return preguntaRepository.findByPreguntaId(id);
  
    
     }
+
+    public List<Pregunta> listarPreguntas(){
+        
+        return preguntaRepository.findAll();
+
+    }
+
+
 }  
 
 
