@@ -15,6 +15,22 @@ public class PreguntaService {
         
         preguntaRepository.save(pregunta);
 
-	}
+    }
     
-}
+    @Autowired
+    PreguntaRepository preguntaRepository2;
+    public Pregunta findRespuestaPorId(Integer id) {
+        
+    preguntaRepository2.findById(id);
+ 
+   
+    }
+}  
+
+
+
+
+
+
+
+
